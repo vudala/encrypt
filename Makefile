@@ -1,7 +1,7 @@
 #!/bin/bash
 
 CC=g++
-FLAGS=-Wall -g --std=c++17
+FLAGS= -g --std=c++17
 LIBS=
 SRC=$(wildcard *.cpp)
 OBJS=$(subst .cpp,.o,$(SRC))
@@ -11,7 +11,7 @@ RM=rm -f
 all: $(OBJS)
 	$(CC) $(FLAGS) $(OBJS) -o $(OUTPUT) $(LIBS)
 
-%.o: %.c
+%.o: %.cpp
 	$(CC) $(FLAGS) -c $<
 
 run:
