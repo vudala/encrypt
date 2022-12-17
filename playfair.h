@@ -4,7 +4,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-void print_table();
+// Aplica o algoritmo de Playfair
 string playfair(string text, string key, bool decrypt = false);
 
 #endif

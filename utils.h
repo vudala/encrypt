@@ -6,7 +6,10 @@ using namespace std;
 
 extern string alphabet;
 
+// Gera um número maluco baseado na chave
 int magic_number(string key);
+
+// Aplica o algoritmo de Josephus sobre o alfabeto para bagunçá-lo
 string josephs_algorithm(string alphabet, int k);
 
 #endif
