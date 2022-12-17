@@ -4,17 +4,12 @@
 
 using namespace std;
 
-// dimensoes da tabela de consulta
 int LIN_LIM = 6, COL_LIM = 6;
-
-// posicao de cada char na tabela
 map<char, pair<int, int>> positions;
-
-// tabela de consulta
 vector<vector<char>> table (LIN_LIM, vector<char> (COL_LIM));
 
 
-// preenche a tabela de consulta utilizando uma chave
+// preenche a tabela de consulta utilizando um chave
 void build_table(string key)
 {
     string chars = "0123456789abcdefghijklmnopqrstuvxwyz";
@@ -22,7 +17,6 @@ void build_table(string key)
     for(char c : chars)
         taken[c] = false;
 
-    // preenche a tabela com os caracteres da chave
     int i = 0, j = 0;
     for(char c : key) {
         if (taken[c] == false) {
@@ -38,7 +32,6 @@ void build_table(string key)
         }
     }
 
-    // termina de encher a tabela com os caracteres restantes do alfabeto, em ordem
     for(char c : chars) {
         if (taken[c] == false) {
             table[i][j] = c;
@@ -55,7 +48,6 @@ void build_table(string key)
 }
 
 
-// quebra o texto em digramas
 vector<string> split_text(string text)
 {
     vector<string> digrams;
@@ -85,7 +77,7 @@ vector<string> split_text(string text)
 }
 
 
-// cifra um digrama
+// encripta um digrama
 string encrypt_digram(string dig)
 {
     auto [i1, j1] = positions[dig[0]];
@@ -93,12 +85,10 @@ string encrypt_digram(string dig)
 
     string res;
 
-    // mesma coluna
     if (j1 == j2) {
         res.push_back(i1 + 1 >= LIN_LIM ? table[0][j1] : table[i1 + 1][j1]);
         res.push_back(i2 + 1 >= LIN_LIM ? table[0][j1] : table[i2 + 1][j1]);
     }
-    // mesma linha
     else if (i1 == i2) {
         res.push_back(j1 + 1 >= LIN_LIM ? table[i1][0] : table[i1][j1 + 1]);
         res.push_back(j2 + 1 >= LIN_LIM ? table[i2][0] : table[i2][j2 + 1]);
@@ -112,7 +102,7 @@ string encrypt_digram(string dig)
 }
 
 
-// decifra um digrama
+// desencripta um digrama utilizando playfair
 string decrypt_digram(string dig)
 {
     auto [i1, j1] = positions[dig[0]];
@@ -120,12 +110,10 @@ string decrypt_digram(string dig)
 
     string res;
 
-    // mesma coluna
     if (j1 == j2) {
         res.push_back(i1 - 1 < 0 ? table[LIN_LIM - 1][j1] : table[i1 - 1][j1]);
         res.push_back(i2 - 1 < 0 ? table[LIN_LIM - 1][j1] : table[i2 - 1][j1]);
     }
-    // mesma linha
     else if (i1 == i2) {
         res.push_back(j1 - 1 < 0 ? table[i1][COL_LIM - 1] : table[i1][j1 - 1]);
         res.push_back(j2 - 1 < 0 ? table[i2][COL_LIM - 1] : table[i2][j2 - 1]);
@@ -139,7 +127,6 @@ string decrypt_digram(string dig)
 }
 
 
-// cifra o texto
 string playfair_encrypt(string key, string clear_text)
 {
     build_table(key);
@@ -155,7 +142,6 @@ string playfair_encrypt(string key, string clear_text)
 }
 
 
-// decifra o texto
 string playfair_decrypt(string key, string cyphered_text)
 {
     build_table(key);

@@ -3,11 +3,8 @@
 
 #include <bits/stdc++.h>
 
-// Cifra um texto utilizando o algoritmo de Playfair
 std::string playfair_encrypt(std::string key, std::string text);
 
-
-// Decifra um texto utilizando o algoritmo de Playfair
 std::string playfair_decrypt(std::string key, std::string text);
 
 
