@@ -1,4 +1,5 @@
 #include "playfair.h"
+#include "utils.h"
 
 #define TABLE_LIM 6
 map<char, pair<int, int>> positions;
@@ -23,7 +24,8 @@ void populate_table(string chars, map<char, bool> &taken, int &i, int &j){
 // preenche a tabela de consulta utilizando um chave
 void build_table(string key)
 {
-    string chars = "0123456789abcdefghijklmnopqrstuvwxyz";
+    string chars = josephs_algorithm(alphabet, magic_number(key));
+
     map<char, bool> taken;
     for(char c : chars)
         taken[c] = false;
@@ -109,7 +111,7 @@ string decrypt_digram(string dig){
 }
 
 vector<string> digrams;
-string play_fair(string text, string key, bool decrypt){
+string playfair(string text, string key, bool decrypt){
     build_table(key);
     digrams = split_text(text);
 

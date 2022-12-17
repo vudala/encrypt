@@ -14,8 +14,11 @@ all: $(OBJS)
 %.o: %.cpp
 	$(CC) $(FLAGS) -c $<
 
-run:
+encrypt:
 	./$(OUTPUT) < input.txt
+
+decrypt:
+	./$(OUTPUT) -d < input.txt
 
 clean:
 	@$(RM) $(OBJS)

@@ -5,6 +5,6 @@
 using namespace std;
 
 void print_table();
-string play_fair(string text, string key, bool decrypt = false);
+string playfair(string text, string key, bool decrypt = false);
 
 #endif
