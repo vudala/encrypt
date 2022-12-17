@@ -5,13 +5,15 @@ using namespace std;
 #include "playfair.h"
 #include "caesar.h"
 
-string encrypt(string text, string key) {
+string encrypt(string text, string key)
+{
     string firstLayer = playfair(text, key);
     string secondLayer = caesar(firstLayer, key);
     return secondLayer;
 }
 
-string decrypt(string text, string key) {
+string decrypt(string text, string key)
+{
     string firstLayer = caesar(text, key, true);
     string secondLayer = playfair(firstLayer, key, true);
     return secondLayer;
@@ -19,7 +21,8 @@ string decrypt(string text, string key) {
 
 bool DECRYPT = false;
 
-void treat_input(int argc, char **argv) {
+void treat_input(int argc, char **argv)
+{
     int option;
     
     while((option = getopt(argc, argv, "dh")) != -1){

@@ -107,7 +107,8 @@ string encrypt_digram(string dig)
 }
 
 
-string decrypt_digram(string dig){
+string decrypt_digram(string dig)
+{
     auto [i1, j1] = positions[dig[0]];
     auto [i2, j2] = positions[dig[1]];
 
@@ -142,7 +143,8 @@ string process_digrams(vector<string> digrams, string (*func)(string))
 }
 
 
-string playfair(string text, string key, bool decrypt){
+string playfair(string text, string key, bool decrypt)
+{
     build_table(key);
 
     vector<string> digrams;
