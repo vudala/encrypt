@@ -7,14 +7,14 @@ using namespace std;
 // dimensoes da tabela de consulta
 int LIN_LIM = 6, COL_LIM = 6;
 
-// posicao de cada char na tabela
-map<char, pair<int, int>> positions;
-
 // tabela de consulta
 vector<vector<char>> table (LIN_LIM, vector<char> (COL_LIM));
 
+// posicao de cada char na tabela
+map<char, pair<int, int>> positions;
 
-// preenche a tabela de consulta utilizando uma chave
+
+// preenche a tabela de consulta
 void build_table(string key)
 {
     string chars = "0123456789abcdefghijklmnopqrstuvxwyz";
