@@ -48,19 +48,14 @@ void treat_input(int &argc, char **argv, string &key, string &text, string &path
 
 string readfile(string path)
 {
-    FILE *file = fopen(path.c_str(), "r");
-    if (!file) {
-        cout << "File doesn't exist" << endl;
-        exit(0);
-    }
+    std::ifstream t(path);
+    std::stringstream buffer;
+    buffer << t.rdbuf();
 
-    char *buffer = NULL;
-    fscanf(file, "%m[^EOF]", &buffer);
+    string ret = buffer.str();
 
-    fclose(file);
-
-    string ret = string(buffer);
-    free(buffer);
+    transform(ret.begin(), ret.end(), ret.begin(),
+    [](unsigned char c){ return std::tolower(c); });
 
     return parse_input(ret);
 }
