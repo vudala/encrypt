@@ -15,10 +15,10 @@ all: $(OBJS)
 	$(CC) $(FLAGS) -c $<
 
 encrypt:
-	./$(OUTPUT) < input.txt
+	./$(OUTPUT) -k vintee9patinhosnumalagoasujadebosta -f ./input.txt
 
 decrypt:
-	./$(OUTPUT) -d < input.txt
+	./$(OUTPUT) -d -k vintee9patinhosnumalagoasujadebosta -f ./output.txt
 
 clean:
 	@$(RM) $(OBJS)
