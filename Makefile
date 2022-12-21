@@ -15,7 +15,7 @@ all: $(OBJS)
 	$(CC) $(FLAGS) -c $<
 
 encrypt:
-	./$(OUTPUT) -k vintee9patinhosnumalagoasujadebosta -f ./input.txt
+	./$(OUTPUT) -k vintee9patinhosnumalagoasujadebosta -f ./input.txt > output.txt
 
 decrypt:
 	./$(OUTPUT) -d -k vintee9patinhosnumalagoasujadebosta -f ./output.txt

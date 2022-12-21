@@ -4,6 +4,7 @@ using namespace std;
 
 #include "caesar.h"
 #include "playfair.h"
+#include "utils.h"
 
 string encrypt(string text, string key)
 {
@@ -47,13 +48,17 @@ void treat_input(int &argc, char **argv, string &key, string &text, string &path
 
 string readfile(string path)
 {
-    ifstream file(path);
-    string   res;
-    string   accumulator;
-    while (file >> res)
-        accumulator += " " + res;
-    file.close();
-    return accumulator;
+    FILE *file = fopen(path.c_str(), "r");
+
+    char *buffer = NULL;
+    fscanf(file, "%m[^EOF]", &buffer);
+
+    fclose(file);
+
+    string ret = string(buffer);
+    free(buffer);
+
+    return parse_input(ret);
 }
 
 int main(int argc, char **argv)
@@ -64,6 +69,5 @@ int main(int argc, char **argv)
     text = readfile(path);
 
     string result = DECRYPT ? decrypt(text, key) : encrypt(text, key);
-
-    cout << result << endl;
+    cout << result;
 }

@@ -39,8 +39,6 @@ void populate_table(string chars, map<char, bool> &taken, int &i, int &j)
             }
         }
     }
-
-    print_table();
 }
 
 // preenche a tabela de consulta utilizando um chave
