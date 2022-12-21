@@ -21,34 +21,50 @@ string decrypt(string text, string key)
 
 bool DECRYPT = false;
 
-void treat_input(int argc, char **argv)
+void treat_input(int& argc, char **argv)
 {
     int option;
     
-    while((option = getopt(argc, argv, "dh")) != -1){
+    while((option = getopt(argc, argv, "dk:f:")) != -1){
         switch(option){
             case 'd':
                 DECRYPT = true;
                 break;
-            case 'h':
-                cout << "Usage: ./main [-d] [-h]" << endl;
-                exit(0);
+            case 'k':
+                break;
+            case 'f':
+                break;
+            default:
+                cout << "Usage: ./main [-d] key filepath" << endl;
+                exit(0); 
         }
     }
-
 }
 
+
+string readfile(char * path) {
+    ifstream file(path);
+    string res;
+    string accumulator;
+    while(file >> res)
+        accumulator += " " + res;
+    file.close();
+    return accumulator;
+}
 
 int main(int argc, char **argv)
 {
     treat_input(argc, argv);
 
     string key, text;
-    cout << "Enter key: ";
-    cin >> key;
-
-    DECRYPT ? cout << "Enter cypher: " : cout << "Enter text: ";
-    cin >> text; 
+    if (argc >= 3) {
+        key = argv[argc - 2];
+        text = readfile(argv[argc - 1]);
+    }
+    else {
+        cout << "Usage: ./main [-d] key filepath" << endl;
+        exit(0);
+    }
 
     string result = DECRYPT ? decrypt(text, key) : encrypt(text, key);
 

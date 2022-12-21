@@ -2,7 +2,7 @@
 #include "utils.h"
 
 // dimensões da tabela de consultar
-#define TABLE_LIM 6
+#define TABLE_LIM 7
 
 // posição de cada char na tabela de consulta
 map<char, pair<int, int>> positions;
