@@ -24,8 +24,8 @@ int magic_number(string key)
 string josephs_algorithm(string alphabet, int k)
 {
     string result;
-    int    n = alphabet.size();
-    int    i = 0;
+    int n = alphabet.size();
+    int i = 0;
     while (n > 0)
     {
         i = (i + k - 1) % n;

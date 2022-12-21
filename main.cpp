@@ -49,6 +49,10 @@ void treat_input(int &argc, char **argv, string &key, string &text, string &path
 string readfile(string path)
 {
     FILE *file = fopen(path.c_str(), "r");
+    if (!file) {
+        cout << "File doesn't exist" << endl;
+        exit(0);
+    }
 
     char *buffer = NULL;
     fscanf(file, "%m[^EOF]", &buffer);
@@ -65,6 +69,11 @@ int main(int argc, char **argv)
 {
     string key, text, path;
     treat_input(argc, argv, key, text, path);
+
+    if (key.empty() || path.empty()) {
+        cout << "Usage: ./main [-d] -k key -f filepath" << endl;
+        exit(0);
+    }
 
     text = readfile(path);
 
