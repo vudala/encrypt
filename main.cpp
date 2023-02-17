@@ -4,20 +4,23 @@ using namespace std;
 
 #include "caesar.h"
 #include "playfair.h"
+#include "transposition.h"
 #include "utils.h"
 
 string encrypt(string text, string key)
 {
-    string firstLayer  = playfair(text, key);
-    string secondLayer = caesar(firstLayer, key);
-    return secondLayer;
+    string first_layer  = playfair(text, key);
+    string second_layer = caesar(first_layer, key);
+    string third_layer = transposition(second_layer, key);
+    return third_layer;
 }
 
 string decrypt(string text, string key)
 {
-    string firstLayer  = caesar(text, key, true);
-    string secondLayer = playfair(firstLayer, key, true);
-    return secondLayer;
+    string third_layer = transposition(text, key, true);
+    string second_layer  = caesar(third_layer, key, true);
+    string first_layer = playfair(second_layer, key, true);
+    return first_layer;
 }
 
 bool DECRYPT = false;
@@ -48,14 +51,14 @@ void treat_input(int &argc, char **argv, string &key, string &text, string &path
 
 string readfile(string path)
 {
-    std::ifstream t(path);
-    std::stringstream buffer;
+    ifstream t(path);
+    stringstream buffer;
     buffer << t.rdbuf();
 
     string ret = buffer.str();
 
     transform(ret.begin(), ret.end(), ret.begin(),
-    [](unsigned char c){ return std::tolower(c); });
+    [](unsigned char c){ return tolower(c); });
 
     return parse_input(ret);
 }
